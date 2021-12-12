@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ProductPageComponent } from './product-page/product-page.component';
@@ -10,13 +10,6 @@ import { ProductDescriptionComponent } from './product-description/product-descr
 import { ProductService } from './product.service';
 import { ProductTracklistingComponent } from './product-tracklisting/product-tracklisting.component';
 import { ProductListComponent } from './product-list/product-list.component';
-import { RouterModule, Routes } from '@angular/router';
-
-const appRoutes: Routes = [
-  {path: 'products', component: ProductListComponent},
-  {path: 'product/:id', component: ProductPageComponent},
-  {path: '', redirectTo: 'products', pathMatch: 'full'}
-];
 
 @NgModule({
   declarations: [
@@ -30,7 +23,11 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot([
+      {path: 'products', component: ProductListComponent},
+      {path: 'product/:id', component: ProductPageComponent},
+      {path: '', redirectTo: 'products', pathMatch: 'full'}
+    ])
   ],
   providers: [
     ProductService
@@ -38,7 +35,5 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-function appRoutes(appRoutes: any): any[]|import("@angular/core").Type<any>|import("@angular/core").ModuleWithProviders {
-  throw new Error('Function not implemented.');
-}
+
 
